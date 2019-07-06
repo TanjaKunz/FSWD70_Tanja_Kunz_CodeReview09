@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 05:09 PM
+-- Generation Time: Jul 06, 2019 at 07:45 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -37,6 +37,20 @@ CREATE TABLE `car` (
   `removal_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `car`
+--
+
+INSERT INTO `car` (`car_id`, `model_id`, `plate_no`, `current_km_status`, `purchase_date`, `removal_date`) VALUES
+(1, 1, 'W-43245', 742583, '1998-11-02', '2003-05-30'),
+(2, 1, 'W-83628', 394728, '1998-11-02', '2001-02-08'),
+(3, 2, 'MD-43203', 195372, '2017-06-14', NULL),
+(4, 3, 'MD-73526', 273625, '2016-10-03', NULL),
+(5, 4, 'BN-39484', 3127658, '2016-05-17', NULL),
+(6, 5, 'BN-63628', 654946, '2005-04-28', '2011-10-06'),
+(7, 6, 'WN-29534', 248263, '2017-07-22', NULL),
+(8, 7, 'WN-12183', 89342, '2018-06-15', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +65,19 @@ CREATE TABLE `car_model` (
   `type` char(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `car_model`
+--
+
+INSERT INTO `car_model` (`model_id`, `make`, `model`, `year`, `type`) VALUES
+(1, 'Opel', 'Corsa', '1998-09-29', NULL),
+(2, 'BMV', '3er Limousine', '2017-05-18', 'Limousine'),
+(3, 'Fiat', 'Freemont', '2016-08-05', 'Off-Road Vehicle'),
+(4, 'Ford', 'Glaxy', '2016-01-21', 'SUV'),
+(5, 'VW', 'Golf', '2005-04-06', NULL),
+(6, 'VW', 'Golf', '2017-06-11', NULL),
+(7, 'VW', 'Golf', '2018-03-19', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +91,16 @@ CREATE TABLE `car_return` (
   `return_date` date NOT NULL,
   `km_status` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `car_return`
+--
+
+INSERT INTO `car_return` (`return_id`, `booking_id`, `location_id`, `return_date`, `km_status`) VALUES
+(1, 1, 1, '1999-06-15', 517371),
+(2, 2, 3, '2011-09-02', 654728),
+(3, 3, 2, '2017-10-25', 1097),
+(4, 4, 2, '2019-01-09', 189014);
 
 -- --------------------------------------------------------
 
@@ -93,6 +130,13 @@ CREATE TABLE `company` (
   `car_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `company`
+--
+
+INSERT INTO `company` (`company_id`, `company_name`, `location_id`, `car_id`) VALUES
+(1, 'Rentals R Us', 2, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -109,6 +153,17 @@ CREATE TABLE `customer` (
   `phone_number` bigint(20) DEFAULT NULL,
   `email` char(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`customer_id`, `cust_address`, `license_no`, `first_name`, `last_name`, `birth_date`, `phone_number`, `email`) VALUES
+(1, 6, 83624395, 'Markus', 'Schmidt', '1976-06-02', 523752, 'markus@gmail.com'),
+(2, 6, 36483846, 'Verena', 'Schmidt', '1980-02-17', 476294, 'verena@gmail.com'),
+(3, 4, 43287462, 'Tom', 'Smith', '1992-08-29', 937263, 'tom@gmail.com'),
+(4, 7, 72384928, 'Marie', 'Huber', '2001-01-16', 293847, 'marie@gmail.com'),
+(5, 1, 58372638, 'Paul', 'Baum', '1986-10-07', 738253, 'paul@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -151,6 +206,16 @@ CREATE TABLE `dispatch` (
   `km_status` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `dispatch`
+--
+
+INSERT INTO `dispatch` (`dispatch_id`, `booking_id`, `location_id`, `dispatch_date`, `km_status`) VALUES
+(1, 1, 1, '1999-06-13', 517328),
+(2, 2, 4, '2011-09-02', 654681),
+(3, 3, 2, '2017-10-25', 1052),
+(4, 4, 2, '2019-01-08', 188973);
+
 -- --------------------------------------------------------
 
 --
@@ -179,6 +244,16 @@ CREATE TABLE `locations` (
   `loc_country` char(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`location_id`, `loc_street`, `loc_ZIP`, `loc_city`, `loc_country`) VALUES
+(1, 'Hauptsraße 134', 32767, 'Munich', 'Germany'),
+(2, 'Ketzergasse 53', 1230, 'Vienna', 'Austria'),
+(3, 'Waldweg 32', 2404, 'Baden', 'Austria'),
+(4, 'Felsgass 16', 2484, 'Wr. Neustadt', 'Austria');
+
 -- --------------------------------------------------------
 
 --
@@ -190,6 +265,16 @@ CREATE TABLE `rental` (
   `customer_id` int(11) NOT NULL,
   `car_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rental`
+--
+
+INSERT INTO `rental` (`booking_id`, `customer_id`, `car_id`) VALUES
+(1, 1, 1),
+(2, 2, 5),
+(3, 3, 2),
+(4, 4, 2);
 
 --
 -- Indexes for dumped tables
@@ -281,19 +366,19 @@ ALTER TABLE `rental`
 -- AUTO_INCREMENT for table `car`
 --
 ALTER TABLE `car`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `car_model`
 --
 ALTER TABLE `car_model`
-  MODIFY `model_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `car_return`
 --
 ALTER TABLE `car_return`
-  MODIFY `return_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `return_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `charges`
@@ -305,7 +390,7 @@ ALTER TABLE `charges`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cust_address`
@@ -317,7 +402,7 @@ ALTER TABLE `cust_address`
 -- AUTO_INCREMENT for table `dispatch`
 --
 ALTER TABLE `dispatch`
-  MODIFY `dispatch_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dispatch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `invoice`
@@ -329,13 +414,13 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rental`
 --
 ALTER TABLE `rental`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
