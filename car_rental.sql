@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 07:45 PM
+-- Generation Time: Jul 07, 2019 at 12:31 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -117,6 +117,16 @@ CREATE TABLE `charges` (
   `damage` mediumint(9) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `charges`
+--
+
+INSERT INTO `charges` (`charge_id`, `km_charge`, `day_charge`, `overdue`, `gasolin`, `damage`) VALUES
+(31, 43, 100, 0, 0, 150),
+(32, 47, 50, 0, 35, 0),
+(33, 45, 50, 0, 0, 0),
+(34, 41, 75, 20, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -229,6 +239,16 @@ CREATE TABLE `invoice` (
   `invoice_date` date NOT NULL,
   `discount` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`invoice_no`, `booking_id`, `charge_id`, `invoice_date`, `discount`) VALUES
+(158, 1, 31, '1999-06-15', 0),
+(159, 2, 32, '2011-09-02', 0),
+(160, 3, 33, '2017-10-25', 0),
+(161, 4, 34, '2019-01-08', -10);
 
 -- --------------------------------------------------------
 
@@ -384,7 +404,7 @@ ALTER TABLE `car_return`
 -- AUTO_INCREMENT for table `charges`
 --
 ALTER TABLE `charges`
-  MODIFY `charge_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `charge_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -408,7 +428,7 @@ ALTER TABLE `dispatch`
 -- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `invoice_no` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `invoice_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `locations`
